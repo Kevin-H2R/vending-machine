@@ -1,7 +1,7 @@
-type Product = {
+type ProductSlot = {
   name: string,
   price: number,
   quantity: number
 }
 
-export type {Product}
+export type {ProductSlot}

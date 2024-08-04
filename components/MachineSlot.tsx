@@ -1,10 +1,10 @@
-import { Product } from "@/utils/types"
+import { ProductSlot } from "@/utils/types"
 
 
 type MachineSlotType = {
-  product: Product
+  product: ProductSlot
   index: number,
-  selected: boolean
+  selected: boolean,
 }
 
 const MachineSlot = ({product, index, selected}: MachineSlotType) => {

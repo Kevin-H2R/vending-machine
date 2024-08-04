@@ -55,8 +55,8 @@ const InputSection = () => {
       }
       const number = Number.parseInt(value)
       if (number < products.length && number >= 0) {
-        if (cardInserted) {
-          // next step
+        if (products[number].quantity < 1) {
+          setErrorText("This product is not available anymore")
           return
         }
         setSelectedSlot(number)

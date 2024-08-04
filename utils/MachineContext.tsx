@@ -1,5 +1,5 @@
 import { createContext, ReactNode, useContext, useState } from "react";
-import { Product } from "./types";
+import { ProductSlot } from "./types";
 
 type MachineContextProps = {
   cardInserted: boolean
@@ -8,7 +8,7 @@ type MachineContextProps = {
   setCardInserted: (value: boolean) => void
   setSelectedSlot: (numero: number | null) => void
   setInsertedCash: (value: number) => void
-  products: Product[]
+  products: ProductSlot[]
 }
 
 const MachineContext = createContext<MachineContextProps | undefined>(undefined)
@@ -19,9 +19,9 @@ const MachineProvider = ({children}: {children: ReactNode}) => {
   const [insertedCash, setInsertedCash] = useState<number>(0)
 
   // I hard-coded those, fetching it from a DB would be preferable
-  const productList: Product[] = [
+  const productList: ProductSlot[] = [
     {name: 'Cola', price: 1100, quantity: 10},
-    {name: 'Water', price: 600, quantity: 10},
+    {name: 'Water', price: 600, quantity: 0},
     {name: 'Coffee', price: 700, quantity: 10},
     {name: 'Cola', price: 1100, quantity: 10},
     {name: 'Coffee', price: 700, quantity: 10},
