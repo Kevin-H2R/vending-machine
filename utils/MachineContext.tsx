@@ -6,7 +6,7 @@ type MachineContextProps = {
   selectedSlot: number | null
   insertedCash: number
   setCardInserted: (value: boolean) => void
-  setSelectedSlot: (numero: number) => void
+  setSelectedSlot: (numero: number | null) => void
   setInsertedCash: (value: number) => void
   products: Product[]
 }
@@ -20,17 +20,17 @@ const MachineProvider = ({children}: {children: ReactNode}) => {
 
   // I hard-coded those, fetching it from a DB would be preferable
   const productList: Product[] = [
-    {name: 'Cola', price: 1100},
-    {name: 'Water', price: 600},
-    {name: 'Coffee', price: 700},
-    {name: 'Cola', price: 1100},
-    {name: 'Coffee', price: 700},
-    {name: 'Cola', price: 1100},
-    {name: 'Cola', price: 1100},
-    {name: 'Water', price: 600},
-    {name: 'Coffee', price: 700},
-    {name: 'Coffee', price: 700},
-    {name: 'Water', price: 600},
+    {name: 'Cola', price: 1100, quantity: 10},
+    {name: 'Water', price: 600, quantity: 10},
+    {name: 'Coffee', price: 700, quantity: 10},
+    {name: 'Cola', price: 1100, quantity: 10},
+    {name: 'Coffee', price: 700, quantity: 10},
+    {name: 'Cola', price: 1100, quantity: 10},
+    {name: 'Cola', price: 1100, quantity: 10},
+    {name: 'Water', price: 600, quantity: 10},
+    {name: 'Coffee', price: 700, quantity: 10},
+    {name: 'Coffee', price: 700, quantity: 10},
+    {name: 'Water', price: 600, quantity: 10},
   ]
 
   const [products] = useState(productList)
@@ -38,7 +38,7 @@ const MachineProvider = ({children}: {children: ReactNode}) => {
     selectedSlot, cardInserted, insertedCash,
     setCardInserted, setSelectedSlot, setInsertedCash,
     products
-    }}>
+  }}>
     {children}
   </MachineContext.Provider>
 }
