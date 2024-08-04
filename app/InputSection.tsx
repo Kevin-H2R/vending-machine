@@ -1,5 +1,6 @@
 import CashButton from "@/components/CashButton"
 import { useMachineContext } from "@/utils/MachineContext"
+import { payBack } from "@/utils/moneyBackAlgo"
 import { useEffect, useState } from "react"
 
 const InputSection = () => {
@@ -33,7 +34,7 @@ const InputSection = () => {
       try {
         handleCashPayment()
       } catch (error) {
-
+        setErrorText("Machine does not have the change to pay you back, please take back your money.")
       }
       return
     }
@@ -71,29 +72,11 @@ const InputSection = () => {
     let diff = insertedCash - products[selectedSlot].price
     // First intuiton was to use DP, but it is actually overkill in that situation
     // regarding korean won bills and coins values. Greedy algo will work fine.
-    const coins = [10000, 5000, 1000, 500, 100]
-    const usedCoins = []
-    const availabities = {...coinsAvailability}
-    let found = false
-    while (diff > 0) {
-      console.log(diff)
-      found = false
-      for (let i = 0; i < coins.length; ++i) {
-        console.log(availabities[coins[i]])
-        if (coins[i] <= diff && availabities[coins[i]] > 0) {
-          usedCoins.push(coins[i])
-          --availabities[coins[i]]
-          diff -= coins[i]
-          found = true
-          break
-        }
-      }
-      if (!found) {
-        throw new Error("Impossible to give cash back");
-      }
-    }
+    const availabities = payBack(coinsAvailability, diff)
     setCoinsAvailability(availabities)
-    // TODO: add customers coins to the machine availabilities
+    setInsertedCash(0)
+    setSelectedSlot(null)
+    setErrorText(`Payment validated, gave you back: ${diff} KRW`)
     setProcessing(false)
 
   }
@@ -124,6 +107,13 @@ const InputSection = () => {
     }
   }
 
+  const giveMoneyBack = () => {
+    if (processing) return
+    const availabilities = payBack(coinsAvailability, insertedCash)
+    setCoinsAvailability(availabilities)
+    setInsertedCash(0)
+  }
+
   return <div className="flex flex-col gap-4">
       Screen:
       <div className="border p-6 h-72">
@@ -151,17 +141,15 @@ const InputSection = () => {
         <span>Inserted Cash:</span>
         <div className="text-xl font-bold ml-5">{insertedCash} KRW</div>
       </div>
-      <button className="bg-red-400 p-3" onClick={() => {
-        if (processing) return
-        setInsertedCash(0)
-        }}>
+      <button className="bg-red-400 p-3" onClick={giveMoneyBack}>
         Get my money back
       </button>
-      <div className="flex gap-4">{Object.keys(coinsAvailability).map((coin) => <div
+      <div className="flex text-xs">Machine&apos;s coin availability:</div>
+      <div className="flex flex-wrap gap-4">{Object.keys(coinsAvailability).map((coin) => <div
         key={'coin_' + coin}
         className="flex"
       >
-        <span>{coin}</span>:<span className="ml-2">{coinsAvailability[Number.parseInt(coin)]}</span>
+        <span>{coin}KRW</span>:<span className="ml-2">{coinsAvailability[Number.parseInt(coin)]}</span>
       </div>)}</div>
     </div>
 }
