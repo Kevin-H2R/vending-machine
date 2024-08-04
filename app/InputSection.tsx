@@ -55,11 +55,7 @@ const InputSection = () => {
     // simulating asking confirmation to the bank with 1sec timeout
     setTimeout(() => {
       setProcessing(false)
-      setProducts(products.map((product, index) => {
-        if (index !== selectedSlot) return product
-        product.quantity -= 1
-        return product
-      }))
+      reduceProductQuantity()
       setSelectedSlot(null)
       setCardInserted(false)
       setErrorText("Payment accepted, thank you")
@@ -74,11 +70,19 @@ const InputSection = () => {
     // regarding korean won bills and coins values. Greedy algo will work fine.
     const availabities = payBack(coinsAvailability, diff)
     setCoinsAvailability(availabities)
+    reduceProductQuantity()
     setInsertedCash(0)
     setSelectedSlot(null)
     setErrorText(`Payment validated, gave you back: ${diff} KRW`)
     setProcessing(false)
+  }
 
+  const reduceProductQuantity = () => {
+    setProducts(products.map((product, index) => {
+      if (index !== selectedSlot) return product
+      product.quantity -= 1
+      return product
+    }))
   }
 
   const onNumeroChange = (e: React.FormEvent<HTMLInputElement>) => {
