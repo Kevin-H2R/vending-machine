@@ -58,7 +58,12 @@ const InputSection = () => {
       reduceProductQuantity()
       setSelectedSlot(null)
       setCardInserted(false)
-      setErrorText("Payment accepted, thank you")
+      if (insertedCash) {
+        const availabities = payBack(coinsAvailability, insertedCash)
+        setCoinsAvailability(availabities)
+        setInsertedCash(0)
+      }
+      setErrorText(`Payment accepted, thank you. ${insertedCash > 0 ? '(Gave you back ' + insertedCash + 'KRW)': ''}`)
     }, 3000);
   }
 
