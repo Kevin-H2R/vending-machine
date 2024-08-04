@@ -1,36 +1,34 @@
-This is a [Next.js](https://nextjs.org/) project bootstrapped with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app).
+Vending machine interview project
 
 ## Getting Started
 
-First, run the development server:
+You can run the project localy using:
 
 ```bash
 npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
 ```
+And use it on [http://localhost:3000](http://localhost:3000) in your browser
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+The project is also uploaded here:
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+https://vending-machine-ashen.vercel.app/
 
-This project uses [`next/font`](https://nextjs.org/docs/basic-features/font-optimization) to automatically optimize and load Inter, a custom Google Font.
 
-## Learn More
+## Interface guide
 
-To learn more about Next.js, take a look at the following resources:
+![alt text](interface.png)
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+## Goal
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js/) - your feedback and contributions are welcome!
+The goal of the project was to design a vending machine system.
+I joined in my subscription the diagram that I made before starting the coding part.
 
-## Deploy on Vercel
+## Technologies
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+The position I applied for is a Frontend engineering position therefore I decided to use **React** in NextJS to realize this project.
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/deployment) for more details.
+I did not use any database to store the data as I thought it was not relevant to what is being evaluated.
+
+## Feedback
+It was a very interesting project that I was excited to realize. I did not encounter any difficulties.
+For the feature about paying back the customer I think a use case where a dynamic programming would have been worth doing would have been interesting.
